@@ -23,4 +23,5 @@ class Test_Produtos():
     self.driver.find_element(By.NAME,"password").send_keys("secret_sauce")           # localiza o campo de senha e insere o valor "secret_sauce"
 
 
+
     
