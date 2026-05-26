@@ -23,8 +23,21 @@ class Test_Produtos():
     self.driver.find_element(By.NAME,"password").send_keys("secret_sauce")           # escreve a senha
     self.driver.find_element(By.ID,"login-button").click()                           # clique no botão de login
 
-    #transição de pagina
+    #transição de tela
 
     assert self.driver.find_element(By.CSS_SELECTOR, ".title").text == "Products"                     # confirma se esta escrito products no elemento
     assert self.driver.find_element(By.ID,"item_4_title_link").text == "Sauce Labs Backpack"           # confirma se é a mochila
     assert self.driver.find_element(By.CSS_SELECTOR, ".inventory_item:nth-child(1) .inventory_item_price").text == "$29.99"                    # confirma o preço da mochila 
+    self.driver.find_element(By.ID,"add-to-cart-sauce-labs-backpack").click()                      # clique no botão de adicionar a mochila ao carrinho
+    assert self.driver.find_element(By.ID,"shopping_cart_container").text == "1"                                                   # confirma se o carrinho tem 1 item
+    self.driver.find_element(By.CSS_SELECTOR, "*[data-test=\"shopping-cart-link\"]").click()                                              # clique no carrinho
+
+    #transição de tela
+
+    assert self.driver.find_element(By.CSS_SELECTOR, ".title").text == "Your Cart"                     # confirma se esta escrito Your Cart na pagina
+    assert self.driver.find_element(By.CSS_SELECTOR, "*[data-test=\"item-quantity\"]").text == "1"
+    assert self.driver.find_element(By.ID,"item_4_title_link").text == "Sauce Labs Backpack"           # confirma se é a mochila no carrinho 
+    assert self.driver.find_element(By.CSS_SELECTOR,"*[data-test=\"inventory-item-price\"]").text == "$29.99"             # confirma o preço da mochila no carrinho
+    self.driver.find_element(By.ID,"remove-sauce-labs-backpack").click()                                 # clique no botão de remover a mochila do carrinho
+    self.driver.find_element(By.ID,"react-burger-menu-btn").click()                                              # clique no menu lateral
+    self.driver.find_element(By.ID,"logout_sidebar_link").click()                                              # clique no botão
